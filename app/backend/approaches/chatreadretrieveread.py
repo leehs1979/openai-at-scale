@@ -2,6 +2,7 @@ import openai
 import uuid
 from approaches.approach import Approach
 import chat_log.cosmosdb_logging as cosmosdb_logging
+import chat_log.scp_obs_logging as scp_obs_logging
 
 class ChatReadRetrieveReadApproach(Approach):
 
@@ -44,6 +45,7 @@ class ChatReadRetrieveReadApproach(Approach):
             stop=None)
         print("completion: ", completion) # For Azure Log Analytics
 
+        # Azure Cosmos DB Logging
         document_definition = { "id": str(uuid.uuid4()),
                                 "chat_session_id": chat_session_id, 
                                 "user": {"name": user_name,"user_id":user_id}, 
@@ -52,7 +54,11 @@ class ChatReadRetrieveReadApproach(Approach):
                                         "other_attr":[{"completion": completion}],
                                         "previous_message_id":"previous_message_id"}}
         
+        # TODO: SCP Object Storage Logging
+        scp_obs_logging.insert_chat_log(document_definition) # Store prompt log data into Azure Cosmos DB
+        
         #cosmosdb_logging.insert_chat_log(document_definition) # Store prompt log data into Azure Cosmos DB
+        
         return {"answer": completion.choices[0].message["content"]}
     
 
