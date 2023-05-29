@@ -136,6 +136,8 @@ function useProvideAppContext() {
     });
 
     const signIn = async () => {
+        
+        // TODO: 수정해야 할 부분
         await msal.instance.loginPopup({
             scopes: ["user.read"],
             prompt: "select_account"

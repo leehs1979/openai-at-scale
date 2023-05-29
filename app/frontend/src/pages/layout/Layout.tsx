@@ -13,7 +13,7 @@ const Layout = () => {
                 <Stack horizontal className={styles.header}>
                     <Stack.Item align="center" grow className={styles.headerTitle}>
                         <Link to="/" className={styles.headerTitleText}>
-                            OpenAI at Scale
+                            SCP ChatGPT Service
                         </Link>
                     </Stack.Item>
                     <Stack.Item align="center" grow disableShrink className={styles.headerCommandBar}>
