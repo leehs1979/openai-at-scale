@@ -28,6 +28,21 @@ const Chat = () => {
     //UserInfo
     const app = useAppContext();
 
+    //For AutoScroll at bottom
+    const chatHeightRef = useRef<HTMLDivElement | null>(null);
+
+    const scrollToBottom = () => {
+
+        if (chatHeightRef.current) {
+            chatHeightRef.current.scrollTop = chatHeightRef.current.scrollHeight;            
+        }        
+    };
+
+    useEffect(() => {
+        scrollToBottom();
+      }, [answers, error]);
+
+    
     const makeApiRequest = async (question: string) => {
         console.log("make api request ....", question);
         lastQuestionRef.current = question;
@@ -67,12 +82,15 @@ const Chat = () => {
             console.log("answer: ", result);
             console.log([...answers, [question, result]]);
             setAnswers([...answers, [question, result]]);
+
+            
         } catch (e) {
             setError(e);
         } finally {
             setIsLoading(false);
         }
     };
+    
 
     const clearChat = () => {
         lastQuestionRef.current = "";
@@ -94,8 +112,8 @@ const Chat = () => {
             <Stack enableScopedSelectors disableShrink horizontal horizontalAlign="center" verticalAlign="center" className={styles.stack}>
                 <Stack.Item grow align="stretch" disableShrink className={styles.stackItem}>
                     <div className={styles.chatRoot}>
-                        <div className={styles.chatContainer}>
-                            <div className={styles.chatMessageStream}>
+                        <div  className={styles.chatContainer}>
+                            <div ref={chatHeightRef} className={styles.chatMessageStream}>
                                 {answers.map((answer, index) => (
                                     <div key={index}>
                                         <UserChatMessage message={answer[0]} />
