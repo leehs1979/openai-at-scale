@@ -138,14 +138,35 @@ function useProvideAppContext() {
     const signIn = async () => {
         
         // TODO: 수정해야 할 부분
-        await msal.instance.loginPopup({
-            scopes: ["user.read"],
-            prompt: "select_account"
-        });
+        // await msal.instance.loginPopup({
+        //     scopes: ["user.read"],
+        //     prompt: "select_account"
+        // });
 
-        // Get the user from Microsoft Graph
-        const user = await getUser(authProvider);
+        // // Get the user from Microsoft Graph
+        // const user = await getUser(authProvider);
+        
+        // const parsedResponse: AskResponse = await response.json();
+        // if (response.status > 299 || !response.ok) {
+        //     throw Error(parsedResponse.error || "Unknown error");
+        // }
+        
+        // console.log(parsedResponse);        
 
+        // if (parsedResponse.totalCount < 1) {
+        //     alert("Authentication Failed!")
+        //     throw Error("Authentication Failed!");            
+        // }
+
+        // setUser({
+        //      displayName: parsedResponse['employees'][0].fullName || "",
+        //      email: parsedResponse['employees'][0].emailAddress || "",
+        // });
+
+        // For DEMO
+        //const user = {displayName: "이희석", mail: "hs9654.lee@samsung.com" };
+        const user = {displayName: "최규황", mail: "kyuh.choi@samsung.com" };
+        
         setUser({
             displayName: user.displayName || "",
             email: user.mail || ""

@@ -15,10 +15,7 @@ const Layout = () => {
                         <Link to="/" className={styles.headerTitleText}>
                             SCP ChatGPT Service
                         </Link>
-                    </Stack.Item>
-                    <Stack.Item align="center" grow disableShrink className={styles.headerCommandBar}>
-                        <Bar />
-                    </Stack.Item>
+                    </Stack.Item>                    
                     <Stack.Item align="center" grow disableShrink className={styles.headerAvatar}>
                         <div className={styles.headerAvatar}>
                             <Avatar />
@@ -32,3 +29,7 @@ const Layout = () => {
 };
 
 export default Layout;
+
+//<Stack.Item align="center" grow disableShrink className={styles.headerCommandBar}>
+//                        <Bar />
+//                    </Stack.Item>

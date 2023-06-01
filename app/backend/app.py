@@ -4,6 +4,7 @@ import openai
 from flask import Flask, request, jsonify
 from azure.identity import DefaultAzureCredential
 from approaches.chatreadretrieveread import ChatReadRetrieveReadApproach
+from filter.wordfilter import filter
 from dotenv import load_dotenv
 
 env_path = os.path.join(os.path.dirname(__file__), '.env')
@@ -41,12 +42,23 @@ def chat():
         impl = chat_approaches.get(approach)
         if not impl:
             return jsonify({"error": "unknown approach"}), 400
+        
+        # Prompt Filtering
+        for prompt in request.json["history"]:
+            print("===HERE, {}", prompt['user'])
+            result, f_word = filter(prompt['user'])
+            if result:
+                print("This prompt contains forbidden words. - {}", f_word)
+                return jsonify({"error": "This prompt contains forbidden words.-"+f_word}), 500
+        
         r = impl.run(request.json["history"], request.json.get("overrides") or {}, request.json.get("sessionConfig") or {}, request.json.get("userInfo") or {}, dict(request.headers) or {})
+       
         return jsonify(r)
 
     except Exception as e:
         logging.exception("Exception in /chat")
         return jsonify({"error": str(e)}), 500
+
 
 
 if __name__ == "__main__":
