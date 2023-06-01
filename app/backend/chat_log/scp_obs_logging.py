@@ -46,10 +46,10 @@ def insert_chat_log(chat_message) -> chat_log_result:
              scp_obs_client = scp_obs_session.client('s3', endpoint_url=endpoint)
              
              # Create Logfile to upload
-             file_name = datetime.now().strftime("%Y%m%d_%H%M%S")+'@'+chat_message['user']['user_id']
+             file_name = datetime.now().strftime("%Y%m%d_%H%M%S")+'@'+chat_message['user']['user_id']+'.txt'
              file_path = os.path.join('.', 'chat_log','logs', file_name)
-             with open(file_path, 'w') as outfile:
-               json.dump(chat_message, outfile, indent=4)             
+             with open(file_path, 'w', encoding='UTF-8') as outfile:
+               json.dump(chat_message, outfile, indent=4, ensure_ascii=False)             
              
              ## Upload the log to SCP Object Storage
              try:
