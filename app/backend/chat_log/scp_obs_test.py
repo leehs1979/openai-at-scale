@@ -11,13 +11,24 @@ from botocore.exceptions import ClientError
 
 '''
 API reference : S3 API 호환 가이드
-URL
+URL (PP)
 Public : https://obj1.kr-west-1.samsungsdscloud.com:8443
 Private : https://obj1.kr-west-1.scp-in.com:8443
 위치 : KR-WEST-1
 Access Key : 16f7f8f97ba9bc62b5b1
 Secret Key : f69040add6a7a0a8af1aa889
 '''
+
+'''
+API reference : S3 API 호환 가이드
+URL (PS)
+Public - https://obj1.skr-west-2.samsungsdscloud.com:8443
+Private - https://obj1.skr-west-2.scp-in.com:8443 (이거사용하자)
+위치 : KR-WEST-2
+Access Key - 1e5f3b0343bf7247954c
+Secret Key - 8d5bedaf6883f6483c3c289d
+'''
+
 
 ## Read environment variables
 env_path = os.path.join(os.path.dirname(__file__), '../.env')
@@ -30,12 +41,19 @@ secret_key = os.environ.get("SCP_OBJECTSTORAGE_SECRET_KEY") or None
 location = os.environ.get("SCP_OBJECTSTORAGE_LOCATION") or None
 bucket_name = os.environ.get("SCP_OBJECTSTORAGE_BUCKET_NAME") or None
 
-# For Test
-endpoint = "https://obj1.kr-west-1.samsungsdscloud.com:8443"
-access_key = "16f7f8f97ba9bc62b5b1"
-secret_key = "f69040add6a7a0a8af1aa889"
-location = "KR-WEST-1"
-bucket_name = "scpchatgptdemo"   # bucket은 생성된다고 가정
+# For Test (PP)
+# endpoint = "https://obj1.kr-west-1.samsungsdscloud.com:8443"
+# access_key = "16f7f8f97ba9bc62b5b1"
+# secret_key = "f69040add6a7a0a8af1aa889"
+# location = "KR-WEST-1"
+# bucket_name = "scpchatgptdemo"   # bucket은 생성된다고 가정
+
+# For Test (PS)
+endpoint = "https://obj1.skr-west-2.scp-in.com:8443"
+access_key = "1e5f3b0343bf7247954c"
+secret_key = "8d5bedaf6883f6483c3c289d"
+location = "KR-WEST-2"
+bucket_name = "scpchatgptdemo" # 생성되어 있는 Bucket
 
 scp_obs_session = boto3.Session(aws_access_key_id=access_key,
                            aws_secret_access_key=secret_key,

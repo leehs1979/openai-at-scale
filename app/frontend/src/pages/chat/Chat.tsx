@@ -26,7 +26,7 @@ const Chat = () => {
     const [answers, setAnswers] = useState<[user: string, response: AskResponse][]>([]);
 
     //UserInfo
-    const app = useAppContext();
+    const app = useAppContext();    
 
     //For AutoScroll at bottom
     const chatHeightRef = useRef<HTMLDivElement | null>(null);
@@ -41,16 +41,24 @@ const Chat = () => {
     useEffect(() => {
         scrollToBottom();
       }, [answers, error]);
-
+        
     
     const makeApiRequest = async (question: string) => {
+        
+         //Check Login
+         console.log("user : ", app.user);
+         if (app.user == undefined){
+             alert('Login please.');
+             throw new Error('Login please.');
+         }
+        
         console.log("make api request ....", question);
         lastQuestionRef.current = question;
         const nullAnswer: AskResponse = { answer: undefined };
         setAnswers([...answers, [question, nullAnswer]]);
         console.log("answers: ", answers);
         error && setError(undefined);
-        setIsLoading(true);
+        setIsLoading(true);       
 
         try {
             const history: ChatTurn[] = answers.map(a => ({ user: a[0], bot: a[1].answer }));

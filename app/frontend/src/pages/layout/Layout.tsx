@@ -13,7 +13,7 @@ const Layout = () => {
                 <Stack horizontal className={styles.header}>
                     <Stack.Item align="center" grow className={styles.headerTitle}>
                         <Link to="/" className={styles.headerTitleText}>
-                            SCP ChatGPT Service
+                            SCP Generative AI Chat Service [DEMO]
                         </Link>
                     </Stack.Item>                    
                     <Stack.Item align="center" grow disableShrink className={styles.headerAvatar}>

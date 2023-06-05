@@ -19,11 +19,11 @@ secret_key = os.environ.get("SCP_OBJECTSTORAGE_SECRET_KEY") or None
 location = os.environ.get("SCP_OBJECTSTORAGE_LOCATION") or None
 bucket_name = os.environ.get("SCP_OBJECTSTORAGE_BUCKET_NAME") or None
 
-# For Test : TODO: 환경변수처리(위)
-endpoint = "https://obj1.kr-west-1.samsungsdscloud.com:8443"
-access_key = "16f7f8f97ba9bc62b5b1"
-secret_key = "f69040add6a7a0a8af1aa889"
-location = "KR-WEST-1"
+# For DEMO : PS : TODO: 환경변수처리(위)
+endpoint = "https://obj1.skr-west-2.scp-in.com:8443"
+access_key = "1e5f3b0343bf7247954c"
+secret_key = "8d5bedaf6883f6483c3c289d"
+location = "KR-WEST-2"
 bucket_name = "scpchatgptdemo" # 생성되어 있는 Bucket
 
 # Replace with your own values if you are changing the default document structure

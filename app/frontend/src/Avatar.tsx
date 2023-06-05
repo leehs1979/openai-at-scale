@@ -17,6 +17,9 @@ import { useId } from "@fluentui/react-hooks";
 import { useAppContext } from "./context/AppContext";
 import { useBoolean } from "@fluentui/react-hooks";
 
+import { TextField, Slider } from "@fluentui/react";
+import { QuestionInput } from "./components/QuestionInput";
+
 export default function Avatar() {
     const app = useAppContext();
     const examplePersona: IPersonaSharedProps = {
@@ -33,6 +36,12 @@ export default function Avatar() {
             background: "white",
             width: 250,
             maxWidth: "100%"
+        },
+        widthstyle: {
+            width: 10            
+        },
+        heightstyle: {
+            height: 20            
         }
     });
     // Tokens definition
@@ -42,7 +51,7 @@ export default function Avatar() {
     };
     const stackStyles: IStackStyles = {
         root: {
-            height: 150
+            height: 260
         }
     };
     const stackAvatarStyles: IStackItemStyles = {
@@ -60,7 +69,7 @@ export default function Avatar() {
             display: "flex",
             justifyContent: "center",
             backgroundColor: "rgb(248, 248, 248)",
-            height: "50px",
+            height: "60px",
             fontSize: "5px"
         }
     };
@@ -101,12 +110,16 @@ export default function Avatar() {
                                         <Persona initialsColor={PersonaInitialsColor.darkBlue} {...examplePersona} size={PersonaSize.size48} />
                                     </UnauthenticatedTemplate>
                                 </Stack.Item>
-                                <Stack.Item styles={stackSignFormStyles}>
-                                    <AuthenticatedTemplate>
-                                        <Label onClick={app.signOut}>Sign Out</Label>
-                                    </AuthenticatedTemplate>
+                                <div>
+                                    <QuestionInput                             
+                                        clearOnSend
+                                        placeholder="[Login-DEMO] Knox ID"
+                                        onSend={id => app.demoSignIn(id)}                                        
+                                    />
+                                </div>
+                                <Stack.Item styles={stackSignFormStyles}>                                
                                     <UnauthenticatedTemplate>
-                                        <Label onClick={app.signIn}>Sign in</Label>
+                                        <Label id="_singout" onClick={app.signOut} >Sign Out</Label>
                                     </UnauthenticatedTemplate>
                                 </Stack.Item>
                             </Stack>

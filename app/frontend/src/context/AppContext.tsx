@@ -35,6 +35,7 @@ type AppContext = {
     sessionId?: sessionInfo;
     signIn?: MouseEventHandler<HTMLElement>;
     signOut?: MouseEventHandler<HTMLElement>;
+    demoSignIn?: MouseEventHandler<HTMLElement>;
     displayError?: Function;
     clearError?: Function;
     authProvider?: AuthCodeMSALBrowserAuthenticationProvider;
@@ -46,6 +47,7 @@ const appContext = createContext<AppContext>({
     error: undefined,
     accessToken: undefined,
     sessionId: undefined,
+    demoSignIn: undefined,
     signIn: undefined,
     signOut: undefined,
     displayError: undefined,
@@ -94,7 +96,8 @@ function useProvideAppContext() {
 
     // <UseEffectSnippet>
     useEffect(() => {
-        const checkUser = async () => {
+        const checkUser = async () => {            
+
             if (!user) {
                 try {
                     // Check if user is already signed in
@@ -134,6 +137,39 @@ function useProvideAppContext() {
         };
         checkUser();
     });
+
+
+    const demoSignIn = async (id: string) => {
+        
+        // dan.paik
+        // kyuh.cho
+        // hs9654.lee
+        let loginUser = {};
+
+        const users = [
+            {id: "dan.paik", displayName: "백동훈", mail: "dan.paik@samsung.com" },
+            {id: "kyuh.cho", displayName: "최규황", mail: "kyuh.choi@samsung.com" },
+            {id: "hs9654.lee", displayName: "이희석", mail: "hs9654.lee@samsung.com" }
+        ];
+
+        for (let i=0;i<users.length;++i){
+            if(id == users[i].id){
+                console.log('SAME');
+                loginUser = users[i];                
+                break;
+            }
+        }
+        
+        console.log(loginUser);
+        
+        setUser({
+             displayName: loginUser.displayName || "",
+             email: loginUser.mail || ""
+        });
+
+        setIsAuthenticated(true);
+
+    }
 
     const signIn = async () => {
         
@@ -175,7 +211,7 @@ function useProvideAppContext() {
     };
 
     const signOut = async () => {
-        await msal.instance.logoutPopup();
+        //await msal.instance.logoutPopup();
         setUser(undefined);
         setIsAuthenticated(false);
     };
@@ -189,6 +225,7 @@ function useProvideAppContext() {
         error,
         accessToken,
         sessionId,
+        demoSignIn,
         signIn,
         signOut,
         displayError,
