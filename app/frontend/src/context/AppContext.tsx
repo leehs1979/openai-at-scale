@@ -35,7 +35,7 @@ type AppContext = {
     sessionId?: sessionInfo;
     signIn?: MouseEventHandler<HTMLElement>;
     signOut?: MouseEventHandler<HTMLElement>;
-    demoSignIn?: MouseEventHandler<HTMLElement>;
+    demoSignIn?: Function;
     displayError?: Function;
     clearError?: Function;
     authProvider?: AuthCodeMSALBrowserAuthenticationProvider;
@@ -144,7 +144,7 @@ function useProvideAppContext() {
         // dan.paik
         // kyuh.cho
         // hs9654.lee
-        let loginUser = {};
+        let loginUser = {id: "dan.paik", displayName: "백동훈", mail: "dan.paik@samsung.com" };
 
         const users = [
             {id: "dan.paik", displayName: "백동훈", mail: "dan.paik@samsung.com" },
@@ -155,7 +155,9 @@ function useProvideAppContext() {
         for (let i=0;i<users.length;++i){
             if(id == users[i].id){
                 console.log('SAME');
-                loginUser = users[i];                
+                loginUser.id = users[i].id;                
+                loginUser.displayName = users[i].displayName; 
+                loginUser.mail = users[i].mail; 
                 break;
             }
         }

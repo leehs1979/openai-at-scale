@@ -110,12 +110,13 @@ export default function Avatar() {
                                         <Persona initialsColor={PersonaInitialsColor.darkBlue} {...examplePersona} size={PersonaSize.size48} />
                                     </UnauthenticatedTemplate>
                                 </Stack.Item>
-                                <div>
+                                <div>                                    
                                     <QuestionInput                             
                                         clearOnSend
                                         placeholder="[Login-DEMO] Knox ID"
-                                        onSend={id => app.demoSignIn(id)}                                        
-                                    />
+                                        onSend={question => app.demoSignIn?.(question)} 
+                                        disabled={false}
+                                    />                                    
                                 </div>
                                 <Stack.Item styles={stackSignFormStyles}>                                
                                     <UnauthenticatedTemplate>
